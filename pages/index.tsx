@@ -1,5 +1,5 @@
-import { Text } from "@chakra-ui/react";
+import HomePage from "../ui-modules/HomePage";
 
 export default function Home() {
-  return <Text color="red">Hi</Text>;
+  return <HomePage />;
 }
