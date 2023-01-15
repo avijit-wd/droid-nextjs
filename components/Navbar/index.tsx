@@ -1,40 +1,24 @@
-import { ReactNode } from "react";
 import {
   Box,
   Flex,
   Avatar,
-  Link,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
   MenuDivider,
-  useColorModeValue,
   Stack,
   Center,
-  Image,
   Text,
   HStack,
+  VStack,
 } from "@chakra-ui/react";
-import droid from "../../assets/image/droid.png";
-
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
+import { signOut, useSession } from "next-auth/react";
 
 function Navbar() {
+  const { data: session } = useSession();
+
   return (
     <>
       <Box bg={"secondary"}>
@@ -60,26 +44,30 @@ function Navbar() {
                   cursor={"pointer"}
                   minW={0}
                 >
-                  <Avatar
-                    size={"sm"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
-                  />
+                  <Flex align="center">
+                    <Text mr={2}>{session?.user?.name}</Text>
+                    <Avatar size={"sm"} src={session?.user?.image as string} />
+                  </Flex>
                 </MenuButton>
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
-                    <Avatar
-                      size={"xl"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
+                    <Avatar size={"xl"} src={session?.user?.image as string} />
                   </Center>
                   <br />
                   <Center>
-                    <p>Username</p>
+                    <VStack>
+                      <Text color="secondary" fontSize="md">
+                        {session?.user?.name}
+                      </Text>
+                      <Text color="text.secondary" fontSize="sm">
+                        {session?.user?.email}
+                      </Text>
+                    </VStack>
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Logout</MenuItem>
+                  <MenuItem onClick={() => signOut()}>Logout</MenuItem>
                 </MenuList>
               </Menu>
             </Stack>

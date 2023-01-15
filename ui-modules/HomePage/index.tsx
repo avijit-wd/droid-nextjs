@@ -1,15 +1,21 @@
-import { Box, Flex, HStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import LeftSidebar from "./components/LeftSidebar";
 import RightSidebar from "./components/RightSidebar";
+import BottomBar from "./components/BottomBar";
+import VideoContent from "./components/VideoContent";
+import { useElementSize } from "usehooks-ts";
 
 const HomePage = () => {
+  const [squareRef, { width, height }] = useElementSize();
+
   const [leftCollapse, setLeftCollapse] = useState(false);
   const [rightCollapse, setRightCollapse] = useState(false);
+  const [bottomCollapse, setBottomCollapse] = useState(false);
 
   const toggleLeftCollapse = () => setLeftCollapse((prev) => !prev);
-
   const toggleRightCollapse = () => setRightCollapse((prev) => !prev);
+  const toggleBottomCollapse = () => setBottomCollapse((prev) => !prev);
 
   return (
     <Flex w="full" height="calc(100vh - 64px)">
@@ -21,7 +27,6 @@ const HomePage = () => {
         alignItems="start"
         flexDirection="column"
         justifyContent="space-between"
-        transition="ease-in-out .2s"
       >
         <LeftSidebar
           leftCollapse={leftCollapse}
@@ -29,9 +34,32 @@ const HomePage = () => {
         />
       </Flex>
 
-      <Flex w="full" bg="red">
-        Hi
-      </Flex>
+      <Stack
+        bg="secondary"
+        w="full"
+        ref={squareRef}
+        spacing={0}
+        justify="space-between"
+      >
+        <Box objectFit={"contain"} overflow="hidden">
+          <VideoContent />
+        </Box>
+
+        <Flex
+          as="aside"
+          w="full"
+          h={bottomCollapse ? "300px" : "40px"}
+          alignItems="start"
+          flexDirection="column"
+          justifyContent="space-between"
+          bg="red"
+        >
+          <BottomBar
+            bottomCollapse={bottomCollapse}
+            toggleBottomCollapse={toggleBottomCollapse}
+          />
+        </Flex>
+      </Stack>
 
       <Flex
         as="aside"
@@ -41,7 +69,6 @@ const HomePage = () => {
         alignItems="start"
         flexDirection="column"
         justifyContent="space-between"
-        transition="ease-in-out .2s"
       >
         <RightSidebar
           rightCollapse={rightCollapse}

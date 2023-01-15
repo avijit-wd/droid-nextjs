@@ -15,10 +15,6 @@ const Chat = () => {
 
     setMessages((old) => [...old, { from: "me", text: data }]);
     setInputMessage("");
-
-    // setTimeout(() => {
-    //   setMessages((old) => [...old, { from: "computer", text: data }]);
-    // }, 1000);
   };
 
   return (
