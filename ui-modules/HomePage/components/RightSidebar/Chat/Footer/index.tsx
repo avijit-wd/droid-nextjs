@@ -21,6 +21,7 @@ const Footer = ({ inputMessage, setInputMessage, handleSendMessage }: any) => {
             border="2px solid"
             borderColor="gray.800"
             borderRadius="4px"
+            maxLength={200}
             _focus={{
               border: "2px solid",
               borderColor: "primary",
