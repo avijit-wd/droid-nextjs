@@ -9,15 +9,24 @@ import {
   MenuItem,
   MenuDivider,
   Stack,
-  Center,
   Text,
   HStack,
-  VStack,
+  Switch,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import { BsFillMoonFill, BsGithub } from "react-icons/bs";
+import Droid from "../../assets/image/droid.png";
+import Link from "next/link";
+import { BiLogOut } from "react-icons/bi";
 
 function Navbar() {
   const { data: session } = useSession();
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  const color = useColorModeValue("tertiary", "text.priamry");
 
   return (
     <>
@@ -28,10 +37,30 @@ function Navbar() {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <HStack spacing={6}>
-            <Text color="text.primary">Droid Logo</Text>
-            <Text color="text.primary">Home</Text>
-            <Text color="text.primary">Developer</Text>
+          <HStack spacing={6} align="center">
+            <Text color="text.primary">
+              <Image
+                src={Droid}
+                alt="droidLogo"
+                height={"20px"}
+                width={"20px"}
+              />
+            </Text>
+            <Link href="/">
+              <a>
+                <Text color="text.primary">Home</Text>
+              </a>
+            </Link>
+            <Link href="/">
+              <a>
+                <Flex align="center">
+                  <Text color="text.primary" mr={1}>
+                    Developer
+                  </Text>
+                  <BsGithub color="#ccc" />
+                </Flex>
+              </a>
+            </Link>
           </HStack>
 
           <Flex alignItems={"center"}>
@@ -50,24 +79,39 @@ function Navbar() {
                   </Flex>
                 </MenuButton>
                 <MenuList alignItems={"center"}>
-                  <br />
-                  <Center>
-                    <Avatar size={"xl"} src={session?.user?.image as string} />
-                  </Center>
-                  <br />
-                  <Center>
-                    <VStack>
-                      <Text color="secondary" fontSize="md">
-                        {session?.user?.name}
-                      </Text>
-                      <Text color="text.secondary" fontSize="sm">
-                        {session?.user?.email}
-                      </Text>
-                    </VStack>
-                  </Center>
-                  <br />
+                  <Flex p={2} align="center">
+                    <Avatar
+                      size={"md"}
+                      src={session?.user?.image as string}
+                      mr={2}
+                    />
+                    <Text color={color} fontWeight="semibold" fontSize="md">
+                      {session?.user?.name}
+                    </Text>
+                  </Flex>
+
                   <MenuDivider />
-                  <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                  <MenuItem>
+                    <BsFillMoonFill />
+                    <Text fontWeight="semibold" color={color} ml={1} mr={8}>
+                      Dark Theme
+                    </Text>
+                    <Box onClick={(e) => e.stopPropagation()}>
+                      <Switch
+                        onChange={toggleColorMode}
+                        id="color-mode"
+                        isChecked={colorMode === "dark"}
+                      />
+                    </Box>
+                  </MenuItem>
+
+                  <MenuDivider />
+                  <MenuItem onClick={() => signOut()}>
+                    <BiLogOut />
+                    <Text fontWeight="semibold" color={color} ml={1}>
+                      Logout
+                    </Text>
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </Stack>

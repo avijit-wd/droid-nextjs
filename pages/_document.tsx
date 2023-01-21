@@ -6,6 +6,11 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
+      <link
+        rel="stylesheet"
+        href="https://video-react.github.io/assets/video-react.css"
+      />
+
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />

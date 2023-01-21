@@ -1,4 +1,4 @@
-import { Flex, IconButton, Stack, Text } from "@chakra-ui/react";
+import { Flex, IconButton, Stack, Text, Tooltip } from "@chakra-ui/react";
 import { FC } from "react";
 import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
 import { BsPeople } from "react-icons/bs";
@@ -21,29 +21,33 @@ const RightSidebar: FC<RightSidebarProps> = ({
       bg="secondary"
       color="text.primary"
       p={2}
+      borderLeft="2px solid"
+      borderColor="gray.700"
     >
       <Flex align="center" justify="space-between">
-        {!rightCollapse ? (
-          <IconButton
-            aria-label="arrowFromLeft"
-            size="sm"
-            bg="transperant"
-            _hover={{ bg: "transperant" }}
-            _active={{ bg: "transperant" }}
-            onClick={toggleRightCollapse}
-            icon={<BiArrowFromRight />}
-          />
-        ) : (
-          <IconButton
-            aria-label="arrowFromLeft"
-            size="sm"
-            bg="transperant"
-            _hover={{ bg: "transperant" }}
-            _active={{ bg: "transperant" }}
-            onClick={toggleRightCollapse}
-            icon={<BiArrowFromLeft />}
-          />
-        )}
+        <Tooltip label="Collapse" hasArrow placement="left">
+          {!rightCollapse ? (
+            <IconButton
+              aria-label="arrowFromLeft"
+              size="sm"
+              bg="transperant"
+              _hover={{ bg: "text.secondary" }}
+              _active={{ bg: "text.secondary" }}
+              onClick={toggleRightCollapse}
+              icon={<BiArrowFromRight />}
+            />
+          ) : (
+            <IconButton
+              aria-label="arrowFromLeft"
+              size="sm"
+              bg="transparent"
+              _hover={{ bg: "text.secondary" }}
+              _active={{ bg: "text.secondary" }}
+              onClick={toggleRightCollapse}
+              icon={<BiArrowFromLeft color="white" />}
+            />
+          )}
+        </Tooltip>
 
         {rightCollapse && (
           <Text fontWeight="semibold" color="text.primary">

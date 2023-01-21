@@ -1,42 +1,61 @@
-import React from "react";
-import VideoPlayer from "../../../../utils/VideoPlayer";
-import videojs from "video.js";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import React, { FC } from "react";
+import ReactPlayer from "react-player";
 
-const VideoContent = () => {
-  const playerRef = React.useRef<any>(null);
+interface VideoContentProps {
+  bottomCollapse: boolean;
+}
 
-  const videoJsOptions = {
-    autoplay: true,
-    controls: false,
-    responsive: true,
-    fluid: true,
-    sources: [
-      {
-        src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        type: "video/mp4",
-      },
-    ],
-  };
-
-  const handlePlayerReady = (player: any) => {
-    playerRef.current = player;
-
-    // You can handle player events here, for example:
-    player.on("waiting", () => {
-      videojs.log("player is waiting");
-    });
-
-    player.on("dispose", () => {
-      videojs.log("player will dispose");
-    });
-  };
+const VideoContent: FC<VideoContentProps> = ({ bottomCollapse }) => {
+  const ref = React.createRef<any>();
 
   return (
-    <Box height="100%" width="100%">
-      <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} />
+    <Box className="player-wrapper" position="relative">
+      <Flex
+        align="center"
+        position="absolute"
+        top={"10px"}
+        right={"10px"}
+        zIndex={100}
+      >
+        <Text color="red.500" fontSize="md">
+          Live
+        </Text>
+        <Box
+          bg="red.500"
+          borderRadius="50%"
+          width="14px"
+          height="14px"
+          ml={1}
+        />
+      </Flex>
+      {!bottomCollapse ? (
+        <ReactPlayer
+          ref={ref}
+          className="player"
+          controls
+          playing
+          url={
+            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          }
+          width="100%"
+          height={`calc((100vh - 64px) - 40px)`}
+        />
+      ) : (
+        <ReactPlayer
+          ref={ref}
+          className="player"
+          controls
+          playing
+          url={
+            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          }
+          width="100%"
+          height={`calc((100vh - 64px) - 100px)`}
+        />
+      )}
     </Box>
   );
 };
 
-export default React.memo(VideoContent);
+export default VideoContent;

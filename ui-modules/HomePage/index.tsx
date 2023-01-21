@@ -10,12 +10,14 @@ const HomePage = () => {
   const [squareRef, { width, height }] = useElementSize();
 
   const [leftCollapse, setLeftCollapse] = useState(false);
-  const [rightCollapse, setRightCollapse] = useState(false);
+  const [rightCollapse, setRightCollapse] = useState(true);
   const [bottomCollapse, setBottomCollapse] = useState(false);
 
   const toggleLeftCollapse = () => setLeftCollapse((prev) => !prev);
   const toggleRightCollapse = () => setRightCollapse((prev) => !prev);
   const toggleBottomCollapse = () => setBottomCollapse((prev) => !prev);
+
+  console.log(height);
 
   return (
     <Flex w="full" height="calc(100vh - 64px)">
@@ -37,18 +39,18 @@ const HomePage = () => {
       <Stack
         bg="secondary"
         w="full"
-        ref={squareRef}
+        height="100%"
         spacing={0}
         justify="space-between"
       >
-        <Box objectFit={"contain"} overflow="hidden">
-          <VideoContent />
+        <Box>
+          <VideoContent bottomCollapse={bottomCollapse} />
         </Box>
 
         <Flex
           as="aside"
           w="full"
-          h={bottomCollapse ? "300px" : "40px"}
+          h={bottomCollapse ? "100px" : "40px"}
           alignItems="start"
           flexDirection="column"
           justifyContent="space-between"

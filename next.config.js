@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  images: {
+    domains: [],
+  },
+
   env: {
     MONGO_URI:
       "mongodb+srv://avijitb440:uwxANBpSCbleTm1S@cluster0.nffhybm.mongodb.net/?retryWrites=true&w=majority",
