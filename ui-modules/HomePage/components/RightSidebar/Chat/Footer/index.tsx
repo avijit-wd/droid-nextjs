@@ -24,7 +24,7 @@ const Footer = ({ inputMessage, setInputMessage, handleSendMessage }: any) => {
             placeholder="Send a message"
             bg={colorMode === "light" ? "gray.200" : "gray.600"}
             border="2px solid"
-            borderColor="gray.800"
+            borderColor="gray.600"
             borderRadius="4px"
             color={color}
             maxLength={200}
@@ -34,7 +34,7 @@ const Footer = ({ inputMessage, setInputMessage, handleSendMessage }: any) => {
             }}
             _hover={{
               border: "2px solid",
-              borderColor: "gray.600",
+              borderColor: "gray.400",
             }}
             onKeyPress={(e) => {
               if (e.key === "Enter") {

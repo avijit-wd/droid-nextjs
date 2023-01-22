@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { Avatar, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Flex, Text, useColorMode } from "@chakra-ui/react";
 
 const Messages = ({ messages }: any) => {
+  const { colorMode } = useColorMode();
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef<any>();
 
@@ -17,12 +18,13 @@ const Messages = ({ messages }: any) => {
           return (
             <Flex key={index} w="100%" justify="flex-end">
               <Flex
-                bg="black"
+                bg={"gray.500"}
                 color="white"
                 minW="100px"
                 maxW="350px"
                 my="1"
                 p="3"
+                borderRadius="6px"
               >
                 <Text>{item.text}</Text>
               </Flex>
