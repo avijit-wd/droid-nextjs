@@ -6,21 +6,27 @@ import {
   InputLeftElement,
   Stack,
   Box,
+  useColorModeValue,
+  useColorMode,
 } from "@chakra-ui/react";
 import { AiOutlineStar } from "react-icons/ai";
 
 const Footer = ({ inputMessage, setInputMessage, handleSendMessage }: any) => {
+  const { colorMode } = useColorMode();
+  const color = useColorModeValue("tertiary", "text.priamry");
+  const bg = useColorModeValue("text.primary", "secondary");
   return (
     <Flex w="100%" mt="5">
-      <Stack spacing={1}>
+      <Stack spacing={1} w="full">
         <InputGroup>
-          <InputLeftElement children={<AiOutlineStar color="#ccc" />} />
+          <InputLeftElement children={<AiOutlineStar />} />
           <Input
             placeholder="Send a message"
-            bg="gray.700"
+            bg={colorMode === "light" ? "gray.200" : "gray.600"}
             border="2px solid"
             borderColor="gray.800"
             borderRadius="4px"
+            color={color}
             maxLength={200}
             _focus={{
               border: "2px solid",

@@ -27,10 +27,10 @@ function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   const color = useColorModeValue("tertiary", "text.priamry");
-
+  const bg = useColorModeValue("text.primary", "secondary");
   return (
     <>
-      <Box bg={"secondary"}>
+      <Box bg={colorMode === "light" ? "white" : "secondary"} boxShadow="sm">
         <Flex
           h={16}
           px={4}
@@ -38,7 +38,7 @@ function Navbar() {
           justifyContent={"space-between"}
         >
           <HStack spacing={6} align="center">
-            <Text color="text.primary">
+            <Text color={color}>
               <Image
                 src={Droid}
                 alt="droidLogo"
@@ -48,16 +48,18 @@ function Navbar() {
             </Text>
             <Link href="/">
               <a>
-                <Text color="text.primary">Home</Text>
+                <Text color={color}>Home</Text>
               </a>
             </Link>
             <Link href="/">
               <a>
                 <Flex align="center">
-                  <Text color="text.primary" mr={1}>
+                  <Text color={color} mr={1}>
                     Developer
                   </Text>
-                  <BsGithub color="#ccc" />
+                  <BsGithub
+                    color={colorMode === "light" ? "black.100" : "gray.600"}
+                  />
                 </Flex>
               </a>
             </Link>
@@ -78,7 +80,7 @@ function Navbar() {
                     <Avatar size={"sm"} src={session?.user?.image as string} />
                   </Flex>
                 </MenuButton>
-                <MenuList alignItems={"center"}>
+                <MenuList alignItems={"center"} zIndex={20}>
                   <Flex p={2} align="center">
                     <Avatar
                       size={"md"}

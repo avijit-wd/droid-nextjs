@@ -6,6 +6,8 @@ import {
   Stack,
   Text,
   Tooltip,
+  useColorMode,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import { BiArrowFromRight, BiArrowFromLeft } from "react-icons/bi";
@@ -22,20 +24,25 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
 }) => {
   const [x, setX] = useState<number | null>(0);
   const [y, setY] = useState<number | null>(0);
+
+  const { colorMode } = useColorMode();
+
+  const color = useColorModeValue("tertiary", "text.priamry");
+  const bg = useColorModeValue("text.primary", "secondary");
   return (
     <Stack
       spacing={4}
       w="full"
       h="full"
-      bg="secondary"
-      color="text.primary"
+      bg={bg}
+      color={color}
       p={2}
       borderRight="2px solid"
       borderColor="gray.700"
     >
       <Flex align="center" justify="space-between">
         {leftCollapse && (
-          <Text fontWeight="semibold" color="text.primary">
+          <Text fontWeight="semibold" color={color}>
             Stats
           </Text>
         )}
@@ -45,19 +52,21 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
             <IconButton
               aria-label="arrowFromLeft"
               size="sm"
-              bg="transperant"
-              _hover={{ bg: "text.secondary" }}
-              _active={{ bg: "text.secondary" }}
+              color={color}
+              bg={bg}
+              _active={{ bg: { bg } }}
+              _hover={{ bg: colorMode === "light" ? "gray.300" : "gray.600" }}
               onClick={toggleLeftCollapse}
-              icon={<BiArrowFromLeft color="white" />}
+              icon={<BiArrowFromLeft />}
             />
           ) : (
             <IconButton
               aria-label="arrowFromLeft"
               size="sm"
-              bg="transperant"
-              _hover={{ bg: "text.secondary" }}
-              _active={{ bg: "text.secondary" }}
+              color={color}
+              bg={bg}
+              _active={{ bg: { bg } }}
+              _hover={{ bg: colorMode === "light" ? "gray.300" : "gray.600" }}
               onClick={toggleLeftCollapse}
               icon={<BiArrowFromRight />}
             />
@@ -76,8 +85,8 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
           </VStack>
 
           <Button
-            bg="tertiary"
-            _hover={{ bg: "text.secondary", color: "text.primary" }}
+            bg={colorMode === "light" ? "gray.300" : "tertiary"}
+            _hover={{ bg: { bg }, opacity: 0.5, color: { color } }}
           >
             Capture
           </Button>
@@ -86,7 +95,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
 
       {leftCollapse && (
         <VStack spacing={6}>
-          <Text color="text.primary" fontWeight="semibold">
+          <Text color={color} fontWeight="semibold">
             Movement
           </Text>
           <Flex
@@ -95,7 +104,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
             align="center"
             h="fit-content"
             w="full"
-            bg="tertiary"
+            bg={colorMode === "light" ? "gray.300" : "tertiary"}
             p={2}
           >
             <Joystick
@@ -111,14 +120,18 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
             ></Joystick>
 
             <Stack mt={3} spacing={0}>
-              <Text fontSize="xs">X: {x}</Text>
-              <Text fontSize="xs">Y: {y}</Text>
+              <Text fontSize="xs" color={color}>
+                X: {x}
+              </Text>
+              <Text fontSize="xs" color={color}>
+                Y: {y}
+              </Text>
             </Stack>
           </Flex>
         </VStack>
       )}
       {leftCollapse && (
-        <Button bg="red" _hover={{ bg: "red.300" }}>
+        <Button bg="red.500" _hover={{ bg: "red.600" }}>
           Stop
         </Button>
       )}

@@ -1,4 +1,12 @@
-import { Flex, IconButton, Stack, Text, Tooltip } from "@chakra-ui/react";
+import {
+  Flex,
+  IconButton,
+  Stack,
+  Text,
+  Tooltip,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
 import { BsPeople } from "react-icons/bs";
@@ -13,13 +21,17 @@ const RightSidebar: FC<RightSidebarProps> = ({
   rightCollapse,
   toggleRightCollapse,
 }) => {
+  const { colorMode } = useColorMode();
+
+  const color = useColorModeValue("tertiary", "text.priamry");
+  const bg = useColorModeValue("text.primary", "secondary");
   return (
     <Stack
       spacing={6}
       w="full"
       h="full"
-      bg="secondary"
-      color="text.primary"
+      bg={bg}
+      color={color}
       p={2}
       borderLeft="2px solid"
       borderColor="gray.700"
@@ -30,9 +42,10 @@ const RightSidebar: FC<RightSidebarProps> = ({
             <IconButton
               aria-label="arrowFromLeft"
               size="sm"
-              bg="transperant"
-              _hover={{ bg: "text.secondary" }}
-              _active={{ bg: "text.secondary" }}
+              color={color}
+              bg={bg}
+              _active={{ bg: { bg } }}
+              _hover={{ bg: colorMode === "light" ? "gray.300" : "gray.600" }}
               onClick={toggleRightCollapse}
               icon={<BiArrowFromRight />}
             />
@@ -40,11 +53,12 @@ const RightSidebar: FC<RightSidebarProps> = ({
             <IconButton
               aria-label="arrowFromLeft"
               size="sm"
-              bg="transparent"
-              _hover={{ bg: "text.secondary" }}
-              _active={{ bg: "text.secondary" }}
+              color={color}
+              bg={bg}
+              _active={{ bg: { bg } }}
+              _hover={{ bg: colorMode === "light" ? "gray.300" : "gray.600" }}
               onClick={toggleRightCollapse}
-              icon={<BiArrowFromLeft color="white" />}
+              icon={<BiArrowFromLeft />}
             />
           )}
         </Tooltip>

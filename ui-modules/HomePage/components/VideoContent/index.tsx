@@ -16,7 +16,7 @@ const VideoContent: FC<VideoContentProps> = ({ bottomCollapse }) => {
         position="absolute"
         top={"10px"}
         right={"10px"}
-        zIndex={100}
+        zIndex={10}
       >
         <Text color="red.500" fontSize="md">
           Live

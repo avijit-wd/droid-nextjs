@@ -18,7 +18,7 @@ video {
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #d8d8d8;
+  background: #777;
   border-radius: 10px;
 }
 /* Handle on hover */

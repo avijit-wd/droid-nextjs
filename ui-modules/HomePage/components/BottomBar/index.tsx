@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Flex,
   HStack,
   IconButton,
@@ -13,6 +12,8 @@ import {
   PopoverTrigger,
   Text,
   Tooltip,
+  useColorMode,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
@@ -42,11 +43,16 @@ const BottomBar: FC<BottomBarProps> = ({
   toggleBottomCollapse,
 }) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
+
+  const { colorMode } = useColorMode();
+
+  const color = useColorModeValue("tertiary", "text.priamry");
+  const bg = useColorModeValue("text.primary", "secondary");
   return (
     <Box
       w="full"
       h="full"
-      bg="secondary"
+      bg={bg}
       position="relative"
       borderTop="2px solid"
       borderColor="gray.700"
@@ -60,16 +66,17 @@ const BottomBar: FC<BottomBarProps> = ({
             </Text>
           </Flex>
 
-          <Text color="text.primary">1:09:89</Text>
+          <Text color={color}>1:09:89</Text>
           {!isOpen && (
             <Tooltip label={"Share"} hasArrow>
               <IconButton
                 size="sm"
+                color={color}
                 aria-label="Search database"
-                bg="transparent"
-                _hover={{ bg: "tertiary" }}
+                bg={bg}
+                _hover={{ bg: colorMode === "light" ? "gray.400" : "gray.600" }}
                 onClick={onToggle}
-                icon={<BiDownload color="white" />}
+                icon={<BiDownload />}
               />
             </Tooltip>
           )}
@@ -86,9 +93,10 @@ const BottomBar: FC<BottomBarProps> = ({
                 <IconButton
                   size="sm"
                   aria-label="Search database"
-                  bg="transparent"
-                  _hover={{ bg: "tertiary" }}
-                  icon={<BiDownload color="white" />}
+                  bg={bg}
+                  _active={{ bg: { bg } }}
+                  _hover={{ bg: { bg } }}
+                  icon={<BiDownload />}
                 />
               </PopoverTrigger>
               <PopoverContent w="fit-content">
@@ -155,17 +163,11 @@ const BottomBar: FC<BottomBarProps> = ({
             border="1px solid"
             borderColor="gray.700"
             aria-label="up-down-icon"
-            bg="secondary"
-            _active={{ bg: "text.secondary" }}
-            _hover={{ bg: "text.secondary" }}
+            bg={bg}
+            _active={{ bg: { bg } }}
+            _hover={{ bg: colorMode === "light" ? "gray.200" : "gray.600" }}
             onClick={toggleBottomCollapse}
-            icon={
-              bottomCollapse ? (
-                <AiOutlineDown color="white" />
-              ) : (
-                <AiOutlineUp color="white" />
-              )
-            }
+            icon={bottomCollapse ? <AiOutlineDown /> : <AiOutlineUp />}
           />
         </Tooltip>
       </Box>
