@@ -28,7 +28,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
   const { colorMode } = useColorMode();
 
   const color = useColorModeValue("tertiary", "text.priamry");
-  const bg = useColorModeValue("text.primary", "secondary");
+  const bg = useColorModeValue("text.primary", "tertiary");
   return (
     <Stack
       spacing={4}
@@ -38,7 +38,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
       color={color}
       p={2}
       borderRight="2px solid"
-      borderColor="gray.700"
+      borderColor={colorMode === "light" ? "gray.300" : "gray.600"}
     >
       <Flex align="center" justify="space-between">
         {leftCollapse && (
@@ -85,7 +85,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
           </VStack>
 
           <Button
-            bg={colorMode === "light" ? "gray.300" : "tertiary"}
+            bg={colorMode === "light" ? "gray.300" : "gray.500"}
             _hover={{ bg: { bg }, opacity: 0.5, color: { color } }}
           >
             Capture
@@ -104,7 +104,7 @@ const LeftSidebar: FC<LeftSidebarProps> = ({
             align="center"
             h="fit-content"
             w="full"
-            bg={colorMode === "light" ? "gray.300" : "tertiary"}
+            bg={colorMode === "light" ? "gray.300" : "gray.500"}
             p={2}
           >
             <Joystick

@@ -24,7 +24,7 @@ const RightSidebar: FC<RightSidebarProps> = ({
   const { colorMode } = useColorMode();
 
   const color = useColorModeValue("tertiary", "text.priamry");
-  const bg = useColorModeValue("text.primary", "secondary");
+  const bg = useColorModeValue("text.primary", "tertiary");
   return (
     <Stack
       spacing={6}
@@ -34,7 +34,7 @@ const RightSidebar: FC<RightSidebarProps> = ({
       color={color}
       p={2}
       borderLeft="2px solid"
-      borderColor="gray.700"
+      borderColor={colorMode === "light" ? "gray.300" : "gray.600"}
     >
       <Flex align="center" justify="space-between">
         <Tooltip label="Collapse" hasArrow placement="left">

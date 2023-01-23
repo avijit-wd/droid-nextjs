@@ -47,7 +47,7 @@ const BottomBar: FC<BottomBarProps> = ({
   const { colorMode } = useColorMode();
 
   const color = useColorModeValue("tertiary", "text.priamry");
-  const bg = useColorModeValue("text.primary", "secondary");
+  const bg = useColorModeValue("text.primary", "tertiary");
   return (
     <Box
       w="full"
@@ -55,7 +55,7 @@ const BottomBar: FC<BottomBarProps> = ({
       bg={bg}
       position="relative"
       borderTop="2px solid"
-      borderColor="gray.700"
+      borderColor="gray.600"
     >
       {bottomCollapse && (
         <HStack w="full" align="center" justify={"flex-end"} p={3}>

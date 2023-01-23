@@ -9,6 +9,8 @@ video {
   object-fit: fill;
 }
 
+/* Style of right Scrollbar */
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -25,3 +27,5 @@ video {
 ::-webkit-scrollbar-thumb:hover {
   background: #b2b2b2;
 }
+
+/* Style of right Scrollbar */

@@ -3,6 +3,7 @@ import { Avatar, Flex, Text, useColorMode } from "@chakra-ui/react";
 
 const Messages = ({ messages }: any) => {
   const { colorMode } = useColorMode();
+
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef<any>();
 

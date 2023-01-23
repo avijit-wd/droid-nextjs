@@ -4,11 +4,8 @@ import LeftSidebar from "./components/LeftSidebar";
 import RightSidebar from "./components/RightSidebar";
 import BottomBar from "./components/BottomBar";
 import VideoContent from "./components/VideoContent";
-import { useElementSize } from "usehooks-ts";
 
 const HomePage = () => {
-  const [squareRef, { width, height }] = useElementSize();
-
   const [leftCollapse, setLeftCollapse] = useState(false);
   const [rightCollapse, setRightCollapse] = useState(true);
   const [bottomCollapse, setBottomCollapse] = useState(false);
