@@ -11,7 +11,7 @@ export default function AuthLayout({
   const loading = status === "loading";
   return (
     <>
-      {session ? (
+      {!loading && session ? (
         <>
           <Navbar />
           <main>{children}</main>

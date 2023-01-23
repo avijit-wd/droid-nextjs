@@ -64,7 +64,7 @@ const RightSidebar: FC<RightSidebarProps> = ({
         </Tooltip>
 
         {rightCollapse && (
-          <Text fontWeight="semibold" color="text.primary">
+          <Text fontWeight="semibold" color={color}>
             Stream chat
           </Text>
         )}
