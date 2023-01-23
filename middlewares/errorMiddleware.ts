@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
 const notFound = (req: Request, res: Response) => {
-  const error = new Error(`Not found- ${req.originalUrl}`);
   res.status(404).end("Page is not Found");
 };
 

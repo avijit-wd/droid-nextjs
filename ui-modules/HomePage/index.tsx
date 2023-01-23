@@ -17,8 +17,6 @@ const HomePage = () => {
   const toggleRightCollapse = () => setRightCollapse((prev) => !prev);
   const toggleBottomCollapse = () => setBottomCollapse((prev) => !prev);
 
-  console.log(height);
-
   return (
     <Flex w="full" height="calc(100vh - 64px)">
       <Flex

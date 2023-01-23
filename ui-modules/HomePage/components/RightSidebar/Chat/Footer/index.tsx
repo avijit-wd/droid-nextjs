@@ -13,8 +13,10 @@ import { AiOutlineStar } from "react-icons/ai";
 
 const Footer = ({ inputMessage, setInputMessage, handleSendMessage }: any) => {
   const { colorMode } = useColorMode();
+
   const color = useColorModeValue("tertiary", "text.priamry");
   const bg = useColorModeValue("text.primary", "secondary");
+
   return (
     <Flex w="100%" mt="5">
       <Stack spacing={1} w="full">
